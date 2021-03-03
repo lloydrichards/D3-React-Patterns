@@ -1,0 +1,25 @@
+body {
+  background-color: #184240;
+  color: #c9d1c1;
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  color: #cb862b;
+}
+pre {
+  background: #c9d1c1;
+  border: 1px solid #ddd;
+  border-left: 3px solid #cb862b;
+  color: #184240;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}

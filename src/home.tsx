@@ -58,6 +58,9 @@ function Home({}: AppProps) {
           <Link to="/example">
             Example Pattern <i>by Lloyd Richards</i>
           </Link>
+          <Link to="/muratorium">
+            Muratorium Pattern <i>by Lloyd Richards</i>
+          </Link>
         </div>
         <p>
           <a
