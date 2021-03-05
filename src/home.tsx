@@ -55,11 +55,11 @@ function Home({}: AppProps) {
           }}
         >
           <h3>Patterns</h3>
-          <Link to="/example">
-            Example Pattern <i>by Lloyd Richards</i>
-          </Link>
           <Link to="/muratorium">
-            Muratorium Pattern <i>by Lloyd Richards</i>
+            Muratorium Pattern
+          </Link>
+          <Link to="/Curran">
+            Curran Pattern
           </Link>
         </div>
         <p>

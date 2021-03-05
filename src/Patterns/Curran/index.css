@@ -1,0 +1,45 @@
+body {
+  background-color: #c9d1c1;
+  color: #184240;
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  color: #cb862b;
+}
+pre {
+  background: #184240;
+  border: 1px solid #ddd;
+  border-left: 3px solid #cb862b;
+  color: #c9d1c1;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+.marks .land {
+  fill: #c9d1c1;
+}
+.marks .sphere {
+  fill: #fbfbfb;
+  opacity: 0.4;
+}
+.marks .interiors {
+  fill: none;
+  stroke: #c9d1c1;
+}
+.marks .graticules {
+  fill: none;
+  stroke: #ececec;
+  opacity: 0.8;
+}
+circle {
+  fill: #cb862b;
+  opacity: 0.3;
+}

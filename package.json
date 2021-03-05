@@ -14,7 +14,8 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "topojson": "^3.0.2"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.0.5",
@@ -30,6 +31,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@types/snowpack-env": "^2.3.2",
+    "@types/topojson": "^3.2.2",
     "@web/test-runner": "^0.12.0",
     "chai": "^4.2.0",
     "prettier": "^2.0.5",
