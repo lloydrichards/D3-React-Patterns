@@ -1,5 +1,12 @@
 .App {
   text-align: left;
+  background-color: #282c34;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 .App code {
   background: #fff3;
@@ -24,20 +31,30 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 35vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #f5814e;
+}
+
+.App-body {
+  font-size: 1rem;
+}
+
+.App-body a {
+  color: #61dafb
 }
 
 .App-link {
-  color: #61dafb;
+  color: #f5814e;
 }
 .route-link a {
   color: #61dafb;
+  margin-top: 0.5em;
+  font-size: 1.5rem;
 }
 
 @keyframes App-logo-spin {
