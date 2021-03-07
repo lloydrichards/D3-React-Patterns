@@ -6,7 +6,7 @@ Collection of various techniques and patterns for organizing a D3 project inside
 
 The challenge here is to represent different ways of implementing D3 into React. This is not to see which is 'best' but rather to see different techniques and evaluate their strengths and weaknesses. In order to make the comparison, each Pattern should use the same data source and present it in three separate chart, that can be interacted with to update all the charts at once.
 
-While viewing the pages on the web is nice, the real show is in the [Github D3-React-Patterns](https://github.com/lloydrichards/D3-React-Patterns) repo where you can see the code and compare the different implementations
+While viewing the pages on the web is nice, the real show is here in the repo where you can see the code and compare the different implementations
 
 ## Available Scripts
 

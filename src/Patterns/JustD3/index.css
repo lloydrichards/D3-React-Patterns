@@ -4,13 +4,19 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+code {
+  background: #c9d1c1;
+  color: #184240;
+  padding: 0 0.2em;
+}
+
 h2 {
   color: #cb862b;
 }
 pre {
   background: #c9d1c1;
   border: 1px solid #ddd;
-  border-left: 3px solid #cb862b;
+  border-left: 6px solid #cb862b;
   color: #184240;
   page-break-inside: avoid;
   font-family: monospace;

@@ -5,45 +5,48 @@ import {
   extent,
   line,
   scaleLinear,
+  scaleLog,
   scaleTime,
   select,
-  timeFormat,
 } from 'd3';
 import React, { useEffect, useRef } from 'react';
-import useResizeObserver from './Util/useResizeObserver';
+import useResizeObserver from '../Util/useResizeObserver';
 
 interface Props {
-  height: number;
-  values: Array<{
-    Source: string;
-    Year: string;
-    Mean: string;
-  }>;
-  labels: [string, string];
+  data: Array<
+    Array<{ date: Date; population: number; country: string; code: string }>
+  >;
 }
 
-const D3Chart: React.FC<Props> = ({ values, labels, height }) => {
+const LineChart: React.FC<Props> = ({ data }) => {
   const svgRef = useRef(null);
   const wrapperRef = useRef<HTMLObjectElement>(null);
   const dimensions = useResizeObserver(wrapperRef);
   useEffect(() => {
-    if (!values || values.length === 0) return;
+    if (!data || data.length === 0) return;
     const svg = select(svgRef.current);
     if (!dimensions) return;
 
+    const allData = data.reduce(
+      (accumulator, countryTimeseries) => accumulator.concat(countryTimeseries),
+      [],
+    );
+
     // Define Scales
-    const xScale = scaleLinear()
-      .domain(extent(values, (d) => +d.Year) as [number, number])
+    const xScale = scaleTime()
+      .domain(extent(allData, (d) => d.date) as [Date, Date])
       .range([0, dimensions.width])
       .nice();
     const yScale = scaleLinear()
-      .domain(extent(values, (d) => +d.Mean) as [number, number])
+      .domain(extent(allData, (d) => +d.population) as [number, number])
       .range([dimensions.height, 0])
       .nice();
 
     // Define Axis
-    const xAxis = axisBottom(xScale);
-    const yAxis = axisLeft(yScale);
+    const xAxis = axisBottom(xScale).ticks(5);
+    const yAxis = axisLeft(yScale).tickFormat(
+      (d) => `${(d as number) / 1000000}M`,
+    );
 
     // Draw Axis
     svg
@@ -76,31 +79,32 @@ const D3Chart: React.FC<Props> = ({ values, labels, height }) => {
       )
       .attr('fill', 'cadetblue')
       .style('text-anchor', 'middle')
-      .text(labels[0]);
+      .text('Year');
     svg
       .selectAll('.y-labels')
       .data([0])
       .join('text')
       .attr('class', 'y-labels')
       .attr('fill', 'cadetblue')
-      .attr('transform', `translate(-30, ${dimensions.height / 2})`)
+      .attr('text-anchor', 'middle')
+      .attr('transform', `translate(-45, ${dimensions.height / 2}) rotate(-90)`)
       .style('text-anchor', 'end')
-      .text(labels[1]);
+      .text('Population');
 
     // Define Shapes
-    const meanLine = line<{
-      Source: string;
-      Year: string;
-      Mean: string;
+    const lineGenerator = line<{
+      date: Date;
+      population: number;
+      country: string;
+      code: string;
     }>()
-      .x((d) => xScale(+d.Year))
-      .y((d) => yScale(+d.Mean))
-      .curve(curveBasis);
+      .x((d) => xScale(d.date))
+      .y((d) => yScale(d.population));
 
     // Draw Marks
     svg
       .selectAll('.line')
-      .data([values])
+      .data(data)
       .join('path')
       .attr('class', 'line')
       .attr('fill', 'none')
@@ -108,12 +112,12 @@ const D3Chart: React.FC<Props> = ({ values, labels, height }) => {
       .attr('stroke-width', 1.5)
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
-      .attr('d', meanLine);
-  }, [dimensions, values]);
+      .attr('d', (d) => lineGenerator(d));
+  }, [dimensions, data]);
 
   return (
     <div
-      style={{ height: height, padding: '20px 20px 20px 60px' }}
+      style={{ height: '300px', padding: '10px 10px 40px 40px' }}
       ref={wrapperRef}
     >
       <svg style={{ overflow: 'visible' }} ref={svgRef}>
@@ -124,4 +128,4 @@ const D3Chart: React.FC<Props> = ({ values, labels, height }) => {
   );
 };
 
-export default D3Chart;
+export default LineChart;
