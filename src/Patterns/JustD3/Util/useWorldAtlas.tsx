@@ -16,7 +16,10 @@ export const useWorldAtlas = () => {
       const { countries, land } = topology.objects;
       setData({
         land: feature(topology, land),
-        countries: feature(topology, countries),
+        countries: {
+          ...feature(topology, countries),
+          id: feature(topology, countries),
+        },
         interiors: mesh(topology, countries, (a, b) => a !== b),
       });
     });

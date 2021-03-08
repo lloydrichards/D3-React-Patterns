@@ -1,5 +1,6 @@
 import { DSVRowArray, timeParse } from 'd3';
 import React, { useState } from 'react';
+import BarChart from './Charts/BarChart';
 import LineChart from './Charts/LineChart';
 import WorldMap from './Charts/WorldMap';
 import { useCSVData } from './Util/useData';
@@ -17,7 +18,10 @@ const Dashboard = () => {
         date: parseYear(year),
         population: d[year] ? +(d[year] || 0) * 1000 : null,
         country: d.Country,
-        code: d['Country code'],
+        code:
+          (d['Country code'] || 0) < 100
+            ? `0${d['Country code']}`
+            : d['Country code'],
       }));
     });
   };
@@ -38,7 +42,8 @@ const Dashboard = () => {
         selected={selected}
         onSelect={setSelected}
       />
-      <LineChart data={data} />
+      <LineChart selected={selected} data={data} />
+      <BarChart selected={selected} data={data} />
     </div>
   );
 };

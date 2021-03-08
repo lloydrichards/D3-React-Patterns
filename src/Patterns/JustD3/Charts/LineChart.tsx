@@ -16,9 +16,10 @@ interface Props {
   data: Array<
     Array<{ date: Date; population: number; country: string; code: string }>
   >;
+  selected: string | null;
 }
 
-const LineChart: React.FC<Props> = ({ data }) => {
+const LineChart: React.FC<Props> = ({ data, selected }) => {
   const svgRef = useRef(null);
   const wrapperRef = useRef<HTMLObjectElement>(null);
   const dimensions = useResizeObserver(wrapperRef);
@@ -103,21 +104,33 @@ const LineChart: React.FC<Props> = ({ data }) => {
 
     // Draw Marks
     svg
+      .selectAll('.selected-line')
+      .data(data.filter((i) => i[0].code === selected))
+      .join('path')
+      .attr('class', 'selected-line')
+      .attr('fill', 'none')
+      .attr('stroke', 'tomato')
+      .attr('stroke-width', 3)
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .attr('d', (d) => lineGenerator(d));
+    svg
       .selectAll('.line')
       .data(data)
       .join('path')
       .attr('class', 'line')
       .attr('fill', 'none')
-      .attr('stroke', 'tomato')
-      .attr('stroke-width', 1.5)
+      .attr('stroke', 'grey')
+      .attr('opacity', 0.3)
+      .attr('stroke-width', 1)
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
       .attr('d', (d) => lineGenerator(d));
-  }, [dimensions, data]);
+  }, [dimensions, data, selected]);
 
   return (
     <div
-      style={{ height: '300px', padding: '10px 10px 40px 40px' }}
+      style={{ height: '200px', padding: '10px 10px 40px 40px' }}
       ref={wrapperRef}
     >
       <svg style={{ overflow: 'visible' }} ref={svgRef}>

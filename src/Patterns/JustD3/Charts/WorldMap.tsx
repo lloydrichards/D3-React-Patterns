@@ -50,33 +50,47 @@ const WorldMap: React.FC<Props> = ({ worldAtlas, selected, onSelect }) => {
       .attr('class', 'sphere')
       .attr('fill', 'rgba(255,255,255,0.05)')
       .attr('d', pathGenerator({ type: 'Sphere' }) || '');
+    svg
+      .selectAll('.graticule')
+      .data([1])
+      .join('path')
+      .attr('class', 'graticule')
+      .attr('fill', 'none')
+      .attr('stroke', 'grey')
+      .attr('opacity', 0.2)
+      .attr('d', pathGenerator(graticule()) || '');
 
     svg
       .selectAll('.land')
       .data(worldAtlas.land.features.map((d: any) => d))
       .join('path')
       .attr('class', 'land')
+      .attr('fill', 'grey')
+      .attr('opacity', 0.8)
       .attr('d', (d: any) => pathGenerator(d));
+
     svg
       .selectAll('.interior')
       .data([worldAtlas.interiors])
       .join('path')
       .attr('class', 'interior')
       .attr('fill', 'none')
-      .attr('stroke', 'grey')
+      .attr('stroke', '#184240')
       .attr('d', (d: any) => pathGenerator(d));
+
     svg
-      .selectAll('.interior')
+      .selectAll('.features')
       .data(worldAtlas.countries.features)
       .join('path')
-      .attr('class', 'interior')
+      .attr('class', 'features')
+      .attr('opacity', (d: any) => (d.id === selected ? 1 : 0))
       .attr('fill', 'tomato')
       .attr('d', (d: any) => pathGenerator(d))
       .on('click', (i, d: any) => onSelect(d.id));
-  }, [dimensions, worldAtlas]);
+  }, [dimensions, worldAtlas, selected]);
 
   return (
-    <div style={{ height: '300px' }} ref={wrapperRef}>
+    <div style={{ height: '200px' }} ref={wrapperRef}>
       <svg style={{ overflow: 'visible' }} ref={svgRef}>
         <g className="x-axis" />
         <g className="y-axis" />
