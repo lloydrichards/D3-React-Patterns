@@ -43,7 +43,8 @@ const Dashboard = () => {
         onSelect={setSelected}
       />
       <LineChart selected={selected} data={data} />
-      <BarChart selected={selected} data={data} />
+      <BarChart selected={selected} data={data}   onSelect={setSelected}
+ />
     </div>
   );
 };

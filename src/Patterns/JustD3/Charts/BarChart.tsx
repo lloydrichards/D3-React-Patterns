@@ -18,9 +18,10 @@ interface Props {
     Array<{ date: Date; population: number; country: string; code: string }>
   >;
   selected: string | null;
+  onSelect: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const BarChart: React.FC<Props> = ({ data, selected }) => {
+const BarChart: React.FC<Props> = ({ data, selected, onSelect }) => {
   const svgRef = useRef(null);
   const wrapperRef = useRef<HTMLObjectElement>(null);
   const dimensions = useResizeObserver(wrapperRef);
@@ -81,7 +82,8 @@ const BarChart: React.FC<Props> = ({ data, selected }) => {
       .attr('y', (d) => yScale(d.country) || 0)
       .attr('width', (d) => xScale(d.population))
       .attr('height', yScale.bandwidth())
-      .attr('fill', (d) => (d.code === selected ? 'tomato' : 'grey'));
+      .attr('fill', (d) => (d.code === selected ? 'tomato' : 'grey'))
+      .on('click', (i, d: any) => onSelect(d.code));
   }, [dimensions, data, selected]);
 
   return (
