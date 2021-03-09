@@ -1,17 +1,23 @@
 body {
-  background-color: #c9d1c1;
-  color: #184240;
+  background-color: #184240;
+  color: #c9d1c1;
   font-family: 'Lato', sans-serif;
+}
+
+p code {
+  background: #c9d1c1;
+  color: #184240;
+  padding: 0 0.2em;
 }
 
 h2 {
   color: #cb862b;
 }
 pre {
-  background: #184240;
+  background: #c9d1c1;
   border: 1px solid #ddd;
-  border-left: 3px solid #cb862b;
-  color: #c9d1c1;
+  border-left: 6px solid #cb862b;
+  color: #184240;
   page-break-inside: avoid;
   font-family: monospace;
   font-size: 15px;
@@ -22,24 +28,4 @@ pre {
   padding: 1em 1.5em;
   display: block;
   word-wrap: break-word;
-}
-.marks .land {
-  fill: #c9d1c1;
-}
-.marks .sphere {
-  fill: #fbfbfb;
-  opacity: 0.4;
-}
-.marks .interiors {
-  fill: none;
-  stroke: #c9d1c1;
-}
-.marks .graticules {
-  fill: none;
-  stroke: #ececec;
-  opacity: 0.8;
-}
-circle {
-  fill: #cb862b;
-  opacity: 0.3;
 }

@@ -1,15 +1,19 @@
 import { DSVRowArray, timeParse } from 'd3';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import BarChart from './Charts/BarChart';
 import LineChart from './Charts/LineChart';
 import WorldMap from './Charts/WorldMap';
 import { useCSVData } from './Util/useCSVData';
+import useResizeObserver from './Util/useResizeObserver';
 import { useWorldAtlas } from './Util/useWorldAtlas';
 
 const parseYear = timeParse('%Y');
 
-const Dashboard = () => {
+export const ChartComponent = () => {
   const [selected, setSelected] = useState<string | null>(null);
+  const wrapperRef = useRef<HTMLObjectElement>(null);
+  const dimensions = useResizeObserver(wrapperRef);
+
   const transform = (raw: DSVRowArray<string>) => {
     const years = raw?.columns?.slice(2);
 
@@ -34,18 +38,25 @@ const Dashboard = () => {
 
   if (!data || !worldAtlas) <pre>Loading...</pre>;
 
-  console.log(selected);
   return (
-    <div>
+    <div ref={wrapperRef}>
       <WorldMap
         worldAtlas={worldAtlas}
         selected={selected}
         onSelect={setSelected}
+        width={dimensions?.width || 0}
       />
-      <LineChart selected={selected} data={data} />
-      <BarChart selected={selected} data={data} onSelect={setSelected} />
+      <LineChart
+        selected={selected}
+        data={data}
+        width={dimensions?.width || 0}
+      />
+      <BarChart
+        selected={selected}
+        data={data}
+        onSelect={setSelected}
+        width={dimensions?.width || 0}
+      />
     </div>
   );
 };
-
-export default Dashboard;
