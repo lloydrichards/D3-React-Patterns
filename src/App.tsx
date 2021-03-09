@@ -15,7 +15,7 @@ const HigherOrderComponent = lazy(
 
 const App = () => {
   return (
-    <Router basename="/">
+    <Router basename="/D3-React-Patterns">
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={Home} />

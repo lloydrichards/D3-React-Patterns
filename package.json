@@ -6,7 +6,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
-  "homepage": "https://lloydrichards.github.io",
+  "homepage": "https://lloydrichards.github.io/D3-React-Patterns",
   "dependencies": {
     "d3": "^6.5.0",
     "d3-collection": "^1.0.7",
