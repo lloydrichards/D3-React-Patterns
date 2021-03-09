@@ -46,17 +46,21 @@ export const ChartComponent = () => {
         onSelect={setSelected}
         width={dimensions?.width || 0}
       />
-      <LineChart
-        selected={selected}
-        data={data}
-        width={dimensions?.width || 0}
-      />
-      <BarChart
-        selected={selected}
-        data={data}
-        onSelect={setSelected}
-        width={dimensions?.width || 0}
-      />
+      {data && (
+        <>
+          <LineChart
+            selected={selected}
+            data={data}
+            width={dimensions?.width || 0}
+          />
+          <BarChart
+            selected={selected}
+            data={data}
+            onSelect={setSelected}
+            width={dimensions?.width || 0}
+          />
+        </>
+      )}
     </div>
   );
 };
