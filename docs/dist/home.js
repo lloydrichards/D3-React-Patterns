@@ -35,7 +35,7 @@ function Home({}) {
     to: "/just+d3"
   }, "JustD3"), /* @__PURE__ */ React.createElement(Link, {
     to: "/with+select+d3"
-  }, "WithSelectD3 (coming soon)"), /* @__PURE__ */ React.createElement(Link, {
+  }, "WithSelectD3"), /* @__PURE__ */ React.createElement(Link, {
     to: "/with+components"
   }, "WithComponents"), /* @__PURE__ */ React.createElement(Link, {
     to: "/with+context"

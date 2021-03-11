@@ -1,6 +1,7 @@
 import React, {lazy, Suspense} from "../snowpack/pkg/react.js";
 import {BrowserRouter as Router, Switch, Route} from "../snowpack/pkg/react-router-dom.js";
 import Home from "./home.js";
+import Navbar from "./Navbar.js";
 const JustD3 = lazy(() => import("./Patterns/JustD3/index.js"));
 const WithComponents = lazy(() => import("./Patterns/WithComponents/index.js"));
 const WithSelectD3 = lazy(() => import("./Patterns/WithSelectD3/index.js"));
@@ -10,7 +11,7 @@ const HigherOrderComponent = lazy(() => import("./Patterns/HigherOrderComponent/
 const App = () => {
   return /* @__PURE__ */ React.createElement(Router, {
     basename: "/D3-React-Patterns"
-  }, /* @__PURE__ */ React.createElement(Suspense, {
+  }, /* @__PURE__ */ React.createElement(Navbar, null), /* @__PURE__ */ React.createElement(Suspense, {
     fallback: /* @__PURE__ */ React.createElement("div", null, "Loading...")
   }, /* @__PURE__ */ React.createElement(Switch, null, /* @__PURE__ */ React.createElement(Route, {
     exact: true,
