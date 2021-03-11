@@ -34,7 +34,7 @@ const LineChart = ({data, selected}) => {
     svg.selectAll(".line").data(data).join("path").attr("class", "line").attr("fill", "none").attr("stroke", "grey").attr("opacity", 0.3).attr("stroke-width", 1).attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("d", (d) => lineGenerator(d));
   }, [dimensions, data, selected]);
   return /* @__PURE__ */ React.createElement("div", {
-    style: {height: "200px", padding: "10px 10px 40px 40px"},
+    style: {height: "250px", padding: "10px 10px 40px 40px"},
     ref: wrapperRef
   }, /* @__PURE__ */ React.createElement("svg", {
     style: {overflow: "visible"},

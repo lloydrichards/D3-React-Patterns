@@ -28,7 +28,7 @@ const WorldMap = ({worldAtlas, selected, onSelect}) => {
     svg.selectAll(".features").data(worldAtlas.countries.features).join("path").attr("class", "features").attr("opacity", (d) => d.id === selected ? 1 : 0).attr("fill", "tomato").attr("d", (d) => pathGenerator(d)).on("click", (i, d) => onSelect(d.id));
   }, [dimensions, worldAtlas, selected]);
   return /* @__PURE__ */ React.createElement("div", {
-    style: {height: "200px"},
+    style: {height: "300px"},
     ref: wrapperRef
   }, /* @__PURE__ */ React.createElement("svg", {
     style: {overflow: "visible"},

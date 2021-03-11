@@ -29,7 +29,7 @@ const BarChart = ({data, selected, onSelect}) => {
     svg.selectAll(".bars").data(latestData).join("rect").attr("class", "bars").attr("x", 0).attr("y", (d) => yScale(d.country) || 0).attr("width", (d) => xScale(d.population)).attr("height", yScale.bandwidth()).attr("fill", (d) => d.code === selected ? "tomato" : "grey").on("click", (i, d) => onSelect(d.code));
   }, [dimensions, data, selected]);
   return /* @__PURE__ */ React.createElement("div", {
-    style: {height: "200px", padding: "10px 10px 40px 40px"},
+    style: {height: "250px", padding: "10px 10px 40px 40px"},
     ref: wrapperRef
   }, /* @__PURE__ */ React.createElement("svg", {
     style: {overflow: "visible"},
