@@ -90,7 +90,7 @@ const WorldMap: React.FC<Props> = ({ worldAtlas, selected, onSelect }) => {
   }, [dimensions, worldAtlas, selected]);
 
   return (
-    <div style={{ height: '200px' }} ref={wrapperRef}>
+    <div style={{ height: '300px' }} ref={wrapperRef}>
       <svg style={{ overflow: 'visible' }} ref={svgRef}>
         <g className="x-axis" />
         <g className="y-axis" />

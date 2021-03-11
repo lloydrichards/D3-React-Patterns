@@ -88,7 +88,7 @@ const BarChart: React.FC<Props> = ({ data, selected, onSelect }) => {
 
   return (
     <div
-      style={{ height: '200px', padding: '10px 10px 40px 40px' }}
+      style={{ height: '250px', padding: '10px 10px 40px 40px' }}
       ref={wrapperRef}
     >
       <svg style={{ overflow: 'visible' }} ref={svgRef}>

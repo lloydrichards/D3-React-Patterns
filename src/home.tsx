@@ -72,7 +72,7 @@ function Home({}: AppProps) {
       >
         <h3>Patterns</h3>
         <Link to="/just+d3">JustD3</Link>
-        <Link to="/with+select+d3">WithSelectD3 (coming soon)</Link>
+        <Link to="/with+select+d3">WithSelectD3</Link>
         <Link to="/with+components">WithComponents</Link>
         <Link to="/with+context">WithContext (coming soon)</Link>
         <Link to="/render+props">RenderProps (coming soon)</Link>

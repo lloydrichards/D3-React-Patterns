@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './home';
+import Navbar from './Navbar';
 
 const JustD3 = lazy(() => import('./Patterns/JustD3/index'));
 const WithComponents = lazy(() => import('./Patterns/WithComponents/index'));
@@ -16,6 +17,7 @@ const HigherOrderComponent = lazy(
 const App = () => {
   return (
     <Router basename="/D3-React-Patterns">
+      <Navbar />
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -26,7 +28,7 @@ const App = () => {
             path="/with+select+d3"
             component={WithSelectD3}
           />
-          <Route path="/with+context" component={WithContext} />
+          <Route path="/with+context" component={WithContext}  />
           <Route path="/render+props" component={RenderProps} />
           <Route
             path="/higher+order+component"

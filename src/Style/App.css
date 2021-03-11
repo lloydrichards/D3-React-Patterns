@@ -1,3 +1,6 @@
+body {
+  background-color: #282c34;
+}
 .App {
   text-align: left;
   background-color: #282c34;
@@ -45,7 +48,7 @@
 }
 
 .App-body a {
-  color: #61dafb
+  color: #61dafb;
 }
 
 .App-link {
@@ -64,4 +67,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2em;
+}
+nav a {
+  color: #61dafb;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding: 0.5em;
+}
+nav .selected {
+  color: #f5814e;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding: 0.5em;
+  border-bottom: 6px solid #cb862b;
+}
+
+nav .disabled {
+  color: #525a6b;
+
 }
