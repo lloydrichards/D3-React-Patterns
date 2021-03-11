@@ -2,6 +2,8 @@
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
 
+[Live Site](https://lloydrichards.github.io/D3-React-Patterns/)
+
 Collection of various techniques and patterns for organizing a D3 project inside a larger React Framework. This will be an open repo for anyone to contribute to, more detail can be found in the DVS slack.
 
 The challenge here is to represent different ways of implementing D3 into React. This is not to see which is 'best' but rather to see different techniques and evaluate their strengths and weaknesses. In order to make the comparison, each Pattern should use the same data source and present it in three separate chart, that can be interacted with to update all the charts at once.
