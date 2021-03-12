@@ -9,9 +9,7 @@ const WithContext = lazy(() => import("./Patterns/WithContext/index.js"));
 const RenderProps = lazy(() => import("./Patterns/RenderProps/index.js"));
 const HigherOrderComponent = lazy(() => import("./Patterns/HigherOrderComponent/index.js"));
 const App = () => {
-  return /* @__PURE__ */ React.createElement(Router, {
-    basename: "/D3-React-Patterns"
-  }, /* @__PURE__ */ React.createElement(Navbar, null), /* @__PURE__ */ React.createElement(Suspense, {
+  return /* @__PURE__ */ React.createElement(Router, null, /* @__PURE__ */ React.createElement(Navbar, null), /* @__PURE__ */ React.createElement(Suspense, {
     fallback: /* @__PURE__ */ React.createElement("div", null, "Loading...")
   }, /* @__PURE__ */ React.createElement(Switch, null, /* @__PURE__ */ React.createElement(Route, {
     exact: true,
