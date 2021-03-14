@@ -74,7 +74,7 @@ function Home({}: AppProps) {
         <Link to="/just+d3">JustD3</Link>
         <Link to="/with+select+d3">WithSelectD3</Link>
         <Link to="/with+components">WithComponents</Link>
-        <Link to="/with+context">WithContext (coming soon)</Link>
+        <Link to="/with+context">WithContext</Link>
         <Link to="/render+props">RenderProps (coming soon)</Link>
         <Link to="/higher+order+components">HOC (coming soon)</Link>
       </div>

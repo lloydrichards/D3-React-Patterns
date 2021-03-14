@@ -1,5 +1,15 @@
-import { DSVRowArray, extent, scaleLinear, scaleTime, timeParse } from 'd3';
-import React, { useContext, useRef, useState } from 'react';
+import {
+  DSVRowArray,
+  extent,
+  ScaleBand,
+  scaleBand,
+  ScaleLinear,
+  scaleLinear,
+  ScaleTime,
+  scaleTime,
+  timeParse,
+} from 'd3';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 import BarChart from './Charts/BarChart';
 import LineChart from './Charts/LineChart';
 import WorldMap from './Charts/WorldMap';
@@ -19,6 +29,11 @@ type ContextProps = {
     code: string;
   }[][];
   width: number | undefined;
+  scales: {
+    PopulationScale: ScaleLinear<number, number, never>;
+    TimeScale: ScaleTime<number, number, never>;
+    CountryCategories: ScaleBand<string>;
+  };
 };
 
 export const AuthContext = React.createContext<ContextProps>(
@@ -32,7 +47,8 @@ export const ChartComponent = () => {
   const wrapperRef = useRef<HTMLObjectElement>(null);
   const dimensions = useResizeObserver(wrapperRef);
 
-  const width = dimensions?.width || 300;
+  const width = dimensions?.width || 450;
+  // Parse Data
   const transform = (raw: DSVRowArray<string>) => {
     const years = raw?.columns?.slice(2);
 
@@ -48,6 +64,7 @@ export const ChartComponent = () => {
       }));
     });
   };
+
   const data: {
     date: Date;
     population: number;
@@ -57,17 +74,22 @@ export const ChartComponent = () => {
     'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv',
     transform,
   );
-
   const worldAtlas = useWorldAtlas();
+
+  const allData = useMemo(
+    () =>
+      data &&
+      data.reduce(
+        (accumulator, countryTimeseries) =>
+          accumulator.concat(countryTimeseries),
+        [],
+      ),
+    [data],
+  );
 
   if (data === null || !worldAtlas) {
     return <div>Loading...</div>;
   }
-
-  const allData = data.reduce(
-    (accumulator, countryTimeseries) => accumulator.concat(countryTimeseries),
-    [],
-  );
 
   // Define Scales
   const TimeScale = scaleTime()
@@ -78,9 +100,26 @@ export const ChartComponent = () => {
     .domain(extent(allData, (d) => +d.population) as [number, number])
     .range([innerHeight, 0])
     .nice();
+  const CountryCategories = scaleBand()
+    .domain(
+      data
+        .map((d) => d[d.length - 1])
+        .slice(0, 25)
+        .map((i) => i.country),
+    )
+    .range([0, innerHeight])
+    .paddingInner(0.2);
 
   return (
-    <AuthContext.Provider value={{ selected, data, width, setSelected }}>
+    <AuthContext.Provider
+      value={{
+        selected,
+        data,
+        width,
+        setSelected,
+        scales: { TimeScale, PopulationScale, CountryCategories },
+      }}
+    >
       <div ref={wrapperRef}>
         <WorldMap worldAtlas={worldAtlas} />
         {data && (

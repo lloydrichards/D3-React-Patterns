@@ -2,7 +2,7 @@
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
 
-[Live Site](https://lloydrichards.github.io/D3-React-Patterns/)
+[Live Site](https://d3-react-patterns.vercel.app/)
 
 Collection of various techniques and patterns for organizing a D3 project inside a larger React Framework. This will be an open repo for anyone to contribute to, more detail can be found in the DVS slack.
 
