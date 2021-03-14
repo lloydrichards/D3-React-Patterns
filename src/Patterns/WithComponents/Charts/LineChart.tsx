@@ -11,7 +11,7 @@ import {
 } from 'd3';
 import React, { useEffect, useRef } from 'react';
 import Line from '../Marks/Line';
-import useResizeObserver from '../Util/useResizeObserver';
+// import useResizeObserver from '../Util/useResizeObserver';
 import ChartWrapper from '../ChartWrapper';
 import getChartDimensions from '../Util/useChartDimensions';
 import Lines from '../Marks/Lines';

@@ -4,16 +4,22 @@ import BarChart from './Charts/BarChart';
 import LineChart from './Charts/LineChart';
 import WorldMap from './Charts/WorldMap';
 import { useCSVData } from './Util/useCSVData';
-import useResizeObserver from './Util/useResizeObserver';
+// import useResizeObserver from './Util/useResizeObserver';
 import { useWorldAtlas } from './Util/useWorldAtlas';
 import getChartDimensions from './Util/useChartDimensions';
+import ChartWrapper from './ChartWrapper';
 
 const parseYear = timeParse('%Y');
 
+// const chartSettings = {
+//   marginRight: 10,
+// };
+
 export const ChartComponent = () => {
   const [selected, setSelected] = useState<string | null>(null);
-  const wrapperRef = useRef<HTMLObjectElement>(null);
-  const dimensions = useResizeObserver(wrapperRef);
+  // const wrapperRef = useRef<HTMLObjectElement>(null);
+  // const dimensions = useResizeObserver(wrapperRef);
+  // const [ref, dms] = getChartDimensions(chartSettings);
 
   const transform = (raw: DSVRowArray<string>) => {
     const years = raw?.columns?.slice(2);
@@ -40,13 +46,13 @@ export const ChartComponent = () => {
   if (!data || !worldAtlas) <pre>Loading...</pre>;
 
   return (
-    <div ref={wrapperRef}>
-      <WorldMap
+    <div className="charts">
+      {/* <WorldMap
         worldAtlas={worldAtlas}
         selected={selected}
         onSelect={setSelected}
         width={dimensions?.width || 0}
-      />
+      /> */}
       {data && (
         <>
           <LineChart
@@ -54,12 +60,12 @@ export const ChartComponent = () => {
             data={data}
             // width={dimensions?.width || 0}
           />
-          <BarChart
+          {/* <BarChart
             selected={selected}
             data={data}
             onSelect={setSelected}
             width={dimensions?.width || 0}
-          />
+          /> */}
         </>
       )}
     </div>

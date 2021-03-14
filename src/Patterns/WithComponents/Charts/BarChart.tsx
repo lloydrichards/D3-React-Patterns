@@ -11,7 +11,7 @@ import {
   select,
 } from 'd3';
 import React, { useEffect, useRef } from 'react';
-import useResizeObserver from '../Util/useResizeObserver';
+// import useResizeObserver from '../Util/useResizeObserver';
 
 interface Props {
   data: Array<

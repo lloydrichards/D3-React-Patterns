@@ -10,10 +10,10 @@ const axisComponentsByDimension: any = {
   y: AxisVertical,
 };
 
-interface AxisComponentProps {
-  dimension: any;
-}
-const Axis = ({ dimension, ...props }: AxisComponentProps) => {
+// interface AxisComponentProps {
+//   dimension: any;
+// }
+const Axis = ({ dimension, ...props }) => {
   const dimensions = useChartDimensions();
   const Component: any = axisComponentsByDimension[dimension];
   if (!Component) return null;

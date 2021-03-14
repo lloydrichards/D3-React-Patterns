@@ -1,5 +1,5 @@
 import { line, curveMonotoneX } from 'd3';
-import 'React';
+import React from 'react';
 
 interface LineProps {
   data: any;
