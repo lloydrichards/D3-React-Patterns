@@ -26,12 +26,11 @@ interface Props {
 const margin = { top: 10, right: 10, bottom: 40, left: 40 };
 
 const BarChart: React.FC<Props> = ({ height = 300 }) => {
-  const { width, selected, setSelected, data } = useDashboard();
+  const { width, selected, setSelected, data, scales } = useDashboard();
   const innerWidth = width || 0 - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  !data && <div>Loading...</div>;
-  const latestData = data.map((d) => d[d.length - 1]).slice(0, 25);
+  const latestData = data && data.map((d) => d[d.length - 1]).slice(0, 25);
 
   // Format
   const tickFormat = (domainValue: NumberValue, index: number) =>
@@ -67,13 +66,13 @@ const BarChart: React.FC<Props> = ({ height = 300 }) => {
         innerWidth={innerWidth}
         margin={margin}
         tickFormat={tickFormat}
-        xScale={xScale}
+        xScale={scales.PopulationScale.range([0, innerWidth])}
       />
       <YBandAxis
         innerHeight={innerHeight}
         innerWidth={innerWidth}
         margin={margin}
-        yScale={yScale}
+        yScale={scales.CountryCategories.range([innerHeight, 0])}
       />
     </svg>
   );

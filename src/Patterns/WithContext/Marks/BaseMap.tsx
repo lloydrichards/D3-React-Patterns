@@ -12,7 +12,6 @@ interface Props {
 
 const BaseMap: React.FC<Props> = ({ pathGenerator, data }) => {
   const graticule = geoGraticule();
-
   return (
     <g>
       <path
@@ -23,6 +22,8 @@ const BaseMap: React.FC<Props> = ({ pathGenerator, data }) => {
       <path
         className="graticule"
         fill="none"
+        stroke="grey"
+        opacity="0.2"
         d={pathGenerator(graticule()) || ''}
       />
       {data &&
@@ -30,7 +31,7 @@ const BaseMap: React.FC<Props> = ({ pathGenerator, data }) => {
           <path
             key={`base-${i}`}
             fill="grey"
-            opacity="0.2"
+            opacity="0.5"
             className="land"
             d={pathGenerator(d) || ''}
           />
