@@ -11,6 +11,7 @@ const RenderProps = lazy(() => import('./Patterns/RenderProps/index'));
 const HigherOrderComponent = lazy(
   () => import('./Patterns/HigherOrderComponent/index'),
 );
+//    <Router basename="/D3-React-Patterns">
 
 const App = () => {
   return (

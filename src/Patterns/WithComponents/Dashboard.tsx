@@ -6,6 +6,7 @@ import WorldMap from './Charts/WorldMap';
 import { useCSVData } from './Util/useCSVData';
 import useResizeObserver from './Util/useResizeObserver';
 import { useWorldAtlas } from './Util/useWorldAtlas';
+import getChartDimensions from './Util/useChartDimensions';
 
 const parseYear = timeParse('%Y');
 
@@ -51,7 +52,7 @@ export const ChartComponent = () => {
           <LineChart
             selected={selected}
             data={data}
-            width={dimensions?.width || 0}
+            // width={dimensions?.width || 0}
           />
           <BarChart
             selected={selected}
