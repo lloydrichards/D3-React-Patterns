@@ -19,7 +19,6 @@ function Navbar({}: Props): ReactElement {
         WithComponents
       </NavLink>
       <NavLink
-        className="disabled"
         activeClassName="selected"
         to="/with+context"
       >
