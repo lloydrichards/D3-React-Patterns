@@ -8,3 +8,5 @@ export interface DimensionsInterface {
   boundedHeight: number;
   boundedWidth: number;
 }
+
+export type tick = Date | string | number;

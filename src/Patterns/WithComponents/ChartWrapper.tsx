@@ -2,13 +2,13 @@ import React, { createContext, useContext } from 'react';
 import type { DimensionsInterface } from './types';
 
 const ChartContext = createContext({});
-export const useChartDimensions = () => useContext(ChartContext);
+export const useDimensionsContext = () => useContext(ChartContext);
 
 interface ChartInterface {
   dimensions: DimensionsInterface;
   children: any;
 }
-const Chart = ({ dimensions, children }: ChartInterface) => (
+const ChartWrapper = ({ dimensions, children }) => (
   <ChartContext.Provider value={dimensions}>
     <svg className="Chart" width={dimensions.width} height={dimensions.height}>
       <g
@@ -20,4 +20,4 @@ const Chart = ({ dimensions, children }: ChartInterface) => (
   </ChartContext.Provider>
 );
 
-export default Chart;
+export default ChartWrapper;

@@ -4,14 +4,12 @@ import { useEffect, useState, useRef } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import type { DimensionsInterface } from '../types';
 
-export const combineChartDimensions = (
-  dimensions: DimensionsInterface | any,
-) => {
-  const parsedDimensions = {
+export const getChartDimensions = (dimensions: any) => {
+  let parsedDimensions = {
     marginTop: 40,
     marginRight: 30,
-    marginBottom: 40,
-    marginLeft: 75,
+    marginBottom: 60,
+    marginLeft: 100,
     ...dimensions,
   };
 
@@ -32,37 +30,35 @@ export const combineChartDimensions = (
   };
 };
 
-const getChartDimensions = (passedSettings: {}) => {
+const useChartDimensions = (passedSettings: any) => {
   const ref = useRef();
-  const dimensions = combineChartDimensions(passedSettings);
-
-  if (dimensions.width && dimensions.height) return [ref, dimensions];
-
+  const dimensions = getChartDimensions(passedSettings);
   const [width, changeWidth] = useState(0);
   const [height, changeHeight] = useState(0);
 
   useEffect(() => {
+    if (dimensions.width && dimensions.height) return [ref, dimensions];
+
     const element = ref.current;
-    const resizeObserver = new ResizeObserver((entries: any) => {
+    const resizeObserver = new ResizeObserver((entries) => {
       if (!Array.isArray(entries)) return;
       if (!entries.length) return;
 
       const entry = entries[0];
 
-      if (width !== entry.contentRect.width) {
+      if (width !== entry.contentRect.width)
         changeWidth(entry.contentRect.width);
-      }
-      if (height !== entry.contentRect.height) {
+      if (height !== entry.contentRect.height)
         changeHeight(entry.contentRect.height);
-      }
     });
+    console.log(element);
 
-    resizeObserver.observe(element!);
+    resizeObserver.observe(element);
 
-    return () => resizeObserver.unobserve(element!);
-  }, []);
+    return () => resizeObserver.unobserve(element);
+  }, [passedSettings, height, width, dimensions]);
 
-  const newSettings = combineChartDimensions({
+  const newSettings = getChartDimensions({
     ...dimensions,
     width: dimensions.width || width,
     height: dimensions.height || height,
@@ -70,5 +66,4 @@ const getChartDimensions = (passedSettings: {}) => {
 
   return [ref, newSettings];
 };
-
-export default getChartDimensions;
+export default useChartDimensions;

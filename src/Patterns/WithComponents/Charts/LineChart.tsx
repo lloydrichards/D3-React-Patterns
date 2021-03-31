@@ -1,100 +1,88 @@
-import {
-  axisBottom,
-  axisLeft,
-  curveBasis,
-  extent,
-  line,
-  scaleLinear,
-  scaleLog,
-  scaleTime,
-  select,
-} from 'd3';
+import { extent, timeFormat, scaleLinear, scaleTime } from 'd3';
 import React, { useEffect, useRef } from 'react';
-import Line from '../Marks/Line';
-// import useResizeObserver from '../Util/useResizeObserver';
 import ChartWrapper from '../ChartWrapper';
-import getChartDimensions from '../Util/useChartDimensions';
+import useChartDimensions from '../Util/useChartDimensions';
 import Lines from '../Marks/Lines';
-import Axis from '../Axis/Axis';
+import Axis from '../Marks/Axis';
 
 interface Props {
   data: Array<
-    Array<{ date: Date; population: number; country: string; code: string }>
+    Array<{
+      date: Date;
+      population: number;
+      country: string;
+      code: string;
+      height: string;
+    }>
   >;
+  height: string;
   selected: string | null;
-  // width: number;
-  // height?: number;
 }
 
-const margin = { top: 10, right: 10, bottom: 40, left: 40 };
-
+type d = {
+  date: Date;
+  population: number;
+  country: string;
+  code: string;
+  height: string;
+};
 const chartSettings = {
-  marginRight: 10,
+  marginRight: 20,
 };
 
-const LineChart: React.FC<Props> = ({
-  data,
-  selected,
-  // width,
-  // height = 250,
-}) => {
-  const [ref, dms] = getChartDimensions(chartSettings);
-  // const innerWidth = width - margin.left - margin.right;
-  // const innerHeight = height - margin.top - margin.bottom;
-
+const LineChart: React.FC<Props> = ({ data, selected, height }) => {
+  const [ref, dms] = useChartDimensions(chartSettings);
   const allData = data.reduce(
     (accumulator, countryTimeseries) => accumulator.concat(countryTimeseries),
     [],
   );
+  const xLabel = 'Year';
+  const yLabel = 'Population';
 
   // Define Accessors
-  const xAccessor = (d: any) => d.date;
-  const yAccessor = (d: any) => d.population;
+  const formatDate = timeFormat('%-Y');
+  const xAccessor = (d: d) => d.date;
+  const yAccessor = (d: d) => +d.population;
 
   // Define Scales
   const xScale = scaleTime()
-    .domain(extent(allData, (d) => d.date) as [Date, Date])
-    .range([0, innerWidth])
+    .domain(extent(allData, xAccessor) as [Date, Date])
+    .range([0, dms.boundedWidth])
     .nice();
   const yScale = scaleLinear()
     .domain(extent(allData, (d) => +d.population) as [number, number])
-    .range([innerHeight, 0])
+    .range([dms.boundedHeight, 0])
     .nice();
 
-  // Define Axis
-  const xAxis = axisBottom(xScale).ticks(5);
-  const yAxis = axisLeft(yScale).tickFormat(
-    (d) => `${(d as number) / 1000000}M`,
-  );
-
-  const yAxisTickFormat = (d: any) => `${(d as number) / 1000000}M`;
-  // Define Shapes
+  //Scale to pass
+  const yAxisFormatTick = (d: any) => `${(d as number) / 1000000}M`;
+  const xAccessorScaled = (d: d) => xScale(xAccessor(d));
+  const yAccessorScaled = (d: d) => yScale(yAccessor(d));
 
   const selectedData = data.find((countries) => countries[0].code === selected);
   return (
-    <div className="line-chart" ref={ref} style={{ height: '600px' }}>
+    <div className="line-chart" ref={ref} style={{ height }}>
       <ChartWrapper dimensions={dms}>
-        <g transform={`translate(${margin.left},${margin.top})`}>
-          {data.map((d) => (
-            <Lines
-              xScale={xScale}
-              yScale={yScale}
-              xAccessor={xAccessor}
-              yAccessor={yAccessor}
-              data={d}
-            />
-          ))}
-          {/* {selectedData && (
-            <Lines selected d={selectedData} />
-          )} */}
-          <Axis dimensions={dms} dimension="x" scale={xScale} />
+        <>
+          <Lines
+            xAccessor={xAccessorScaled}
+            yAccessor={yAccessorScaled}
+            data={data}
+            selected={selectedData}
+          />
           <Axis
-            dimensions={dms}
+            dimension="x"
+            scale={xScale}
+            label={xLabel}
+            formatTick={formatDate}
+          />
+          <Axis
             dimension="y"
             scale={yScale}
-            tickFormat={yAxisTickFormat}
+            formatTick={yAxisFormatTick}
+            label={yLabel}
           />
-        </g>
+        </>
       </ChartWrapper>
     </div>
   );
