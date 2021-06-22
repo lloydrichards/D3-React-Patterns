@@ -36,7 +36,7 @@ function Navbar({}: Props): ReactElement {
         HOC
       </NavLink>
       <NavLink activeClassName="selected" to="hex+map">
-        HOC
+        Hex Map
       </NavLink>
     </nav>
   );
