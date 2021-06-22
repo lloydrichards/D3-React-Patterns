@@ -18,10 +18,7 @@ function Navbar({}: Props): ReactElement {
       <NavLink activeClassName="selected" to="/with+components">
         WithComponents
       </NavLink>
-      <NavLink
-        activeClassName="selected"
-        to="/with+context"
-      >
+      <NavLink activeClassName="selected" to="/with+context">
         WithContext
       </NavLink>
       <NavLink
@@ -36,6 +33,9 @@ function Navbar({}: Props): ReactElement {
         activeClassName="selected"
         to="/higher+order+components"
       >
+        HOC
+      </NavLink>
+      <NavLink activeClassName="selected" to="hex+map">
         HOC
       </NavLink>
     </nav>
