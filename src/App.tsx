@@ -11,6 +11,7 @@ const RenderProps = lazy(() => import('./Patterns/RenderProps/index'));
 const HigherOrderComponent = lazy(
   () => import('./Patterns/HigherOrderComponent/index'),
 );
+const HexMap = lazy(() => import('./Patterns/HexMap/index'));
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/with+select+d3" component={WithSelectD3} />
           <Route path="/with+context" component={WithContext} />
           <Route path="/render+props" component={RenderProps} />
+          <Route path="/hex+map" component={HexMap} />
           <Route
             path="/higher+order+component"
             component={HigherOrderComponent}
